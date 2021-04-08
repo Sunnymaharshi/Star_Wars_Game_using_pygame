@@ -1,2 +1,7 @@
-# PygameForBeginners
-A simple 2D python game designed to teach you the pygame module.
+# Star Wars 
+## multiplayer game
+### Created by pygame tutorial by techwithtim
+#### fixed health bug
+#### increased speed of spaceship
+#### added automatic window resize according to screen size
+
