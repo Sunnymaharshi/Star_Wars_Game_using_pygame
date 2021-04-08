@@ -6,7 +6,6 @@ pygame.mixer.init()
 root=tk.Tk()
 
 WIDTH, HEIGHT = root.winfo_screenwidth()-100,root.winfo_screenheight()-100
-#WIDTH, HEIGHT = 900+200, 500+100
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Star Wars")
 
@@ -47,7 +46,6 @@ SPACE = pygame.transform.scale(pygame.image.load(
 
 def draw_window(red, yellow, red_bullets, yellow_bullets, red_health, yellow_health):
     WIN.blit(SPACE, (0, 0))
-    #pygame.draw.rect(WIN, BLACK, BORDER)
 
     red_health_text = HEALTH_FONT.render(
         "Health: " + str(red_health), 1, RED)
