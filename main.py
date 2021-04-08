@@ -1,11 +1,14 @@
 import pygame
 import os
+import tkinter as tk
 pygame.font.init()
 pygame.mixer.init()
+root=tk.Tk()
 
-WIDTH, HEIGHT = 900, 500
+WIDTH, HEIGHT = root.winfo_screenwidth()-100,root.winfo_screenheight()-100
+#WIDTH, HEIGHT = 900+200, 500+100
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("First Game!")
+pygame.display.set_caption("Star Wars")
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -21,11 +24,10 @@ HEALTH_FONT = pygame.font.SysFont('comicsans', 40)
 WINNER_FONT = pygame.font.SysFont('comicsans', 100)
 
 FPS = 60
-VEL = 5
-BULLET_VEL = 7
-MAX_BULLETS = 3
+VEL = 7
+BULLET_VEL = 7+5
+MAX_BULLETS = 3+10
 SPACESHIP_WIDTH, SPACESHIP_HEIGHT = 55, 40
-
 YELLOW_HIT = pygame.USEREVENT + 1
 RED_HIT = pygame.USEREVENT + 2
 
@@ -45,12 +47,12 @@ SPACE = pygame.transform.scale(pygame.image.load(
 
 def draw_window(red, yellow, red_bullets, yellow_bullets, red_health, yellow_health):
     WIN.blit(SPACE, (0, 0))
-    pygame.draw.rect(WIN, BLACK, BORDER)
+    #pygame.draw.rect(WIN, BLACK, BORDER)
 
     red_health_text = HEALTH_FONT.render(
-        "Health: " + str(red_health), 1, WHITE)
+        "Health: " + str(red_health), 1, RED)
     yellow_health_text = HEALTH_FONT.render(
-        "Health: " + str(yellow_health), 1, WHITE)
+        "Health: " + str(yellow_health), 1, YELLOW)
     WIN.blit(red_health_text, (WIDTH - red_health_text.get_width() - 10, 10))
     WIN.blit(yellow_health_text, (10, 10))
 
@@ -107,11 +109,15 @@ def handle_bullets(yellow_bullets, red_bullets, yellow, red):
 
 
 def draw_winner(text):
+        
     draw_text = WINNER_FONT.render(text, 1, WHITE)
+
+
+    
     WIN.blit(draw_text, (int(WIDTH/2) - int(draw_text.get_width() /
                          2), int(HEIGHT/2) - int(draw_text.get_height()/2)))
     pygame.display.update()
-    pygame.time.delay(5000)
+    pygame.time.delay(3000)
 
 
 def main():
@@ -121,8 +127,8 @@ def main():
     red_bullets = []
     yellow_bullets = []
 
-    red_health = 10
-    yellow_health = 10
+    red_health = 33
+    yellow_health = 33
 
     clock = pygame.time.Clock()
     run = True
@@ -154,16 +160,7 @@ def main():
                 yellow_health -= 1
                 BULLET_HIT_SOUND.play()
 
-        winner_text = ""
-        if red_health <= 0:
-            winner_text = "Yellow Wins!"
-
-        if yellow_health <= 0:
-            winner_text = "Red Wins!"
-
-        if winner_text != "":
-            draw_winner(winner_text)
-            break
+        
 
         keys_pressed = pygame.key.get_pressed()
         yellow_handle_movement(keys_pressed, yellow)
@@ -173,7 +170,16 @@ def main():
 
         draw_window(red, yellow, red_bullets, yellow_bullets,
                     red_health, yellow_health)
+        winner_text = ""
+        if red_health <= 0:
+            winner_text += "Yellow Wins!!!"
 
+        if yellow_health <= 0:
+            winner_text += "Red Wins!!!"
+
+        if winner_text != "":
+            draw_winner(winner_text)
+            break
     main()
 
 
