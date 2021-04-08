@@ -7,6 +7,7 @@ root=tk.Tk()
 
 WIDTH, HEIGHT = root.winfo_screenwidth()-100,root.winfo_screenheight()-100
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
+root.destroy()
 pygame.display.set_caption("Star Wars")
 
 WHITE = (255, 255, 255)
